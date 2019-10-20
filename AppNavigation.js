@@ -12,7 +12,7 @@ import Oderdetail  from  './screens/oderdetail';
 const MainNavigator = createStackNavigator({  
     // mapview: {screen: Example},
     Home: {screen: LoginScreen},
-    // LoginSuccess: {screen: Getapex},
+    LoginSuccess: {screen: Getapex},
     JobList: {screen :ListJob },
     oderdetail: {screen: Oderdetail },
     // maplocation: {screen: MapLocation},

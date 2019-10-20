@@ -20,7 +20,10 @@ import { AuthSession } from 'expo';
 import * as FileSystem from 'expo-file-system';
 // import RNFetchBlob from 'rn-fetch-blob'
 import axios from 'axios';
-// import {RNFS} from 'react-native-fs';
+// import * as RNFS from 'react-native-fs';
+// const RNFS = require("react-native-fs");
+// import {RNFS} from '../fs';
+
 
 const redirectUrl ='http://221.133.17.20:3030/api/upimage';
 const getApex = 'http://118.70.197.124/ords/retail/delivery/putimage';
@@ -141,7 +144,7 @@ export default class Upimage  extends React.Component {
       });
 
       this._handleImagePicked(pickerResult);
-      console.log(pickerResult.uri)
+      // console.log(pickerResult.uri)
     }
   };
 
@@ -166,76 +169,47 @@ export default class Upimage  extends React.Component {
   async uploadImageAsync(URI){
 
     const DEL_ID = this.state.paramsup;
-    const path = URI.replace("file://", "");
-// const formData = [];
-// formData.push({
-//   name: "photo",
-//   filename: `photo.jpg`,
-//   data: RNFetchBlob.wrap(path)
-// });
-    // const RNFS = require("react-native-fs");
-// response.uri from react-native-camera
-  //   RNFS.readFile(URI, "base64").then(data => {
-
-  // let URI = data;
-  // console.log(data);
-  //   });
-    // let tmp = await FileSystem.getContentUriAsync(URI);
-    
-    // let path = tmp;
-    // console.log(test);
-    // console.log(tmp);
+    // const path = URI.replace("file://", "");
+    // RNFS.readFile(URI, "base64").then(data => {
+    //           let URI = data;
+    //        console.log(URI);
+    // });
     let apiUrl = 'http://118.70.197.124/ords/retail/delivery/putimage';
-    // let apiUrl = 'http://221.133.17.20:3030/api/upimage';
-    // let uripath = FileSystem.getInfoAsync(uri);
-    // console.log(uripath);
-    let uriParts = URI.split('.');
-    let nameimage = URI.split('/');
-    let filename = nameimage[nameimage.length-1];
-    // let uriParts = uri.split('/');    
+    // let apiUrl = 'http://221.133.17.20:3030/api/upimage'; 
+    // let getimage = await FileSystem.readAsStringAsync(URI,FileSystem.EncodingType.Base64).then(get => {
+    //   console.log(get);
+    // });
+    // console.log(getimage);
+    let uriParts = URI.split('.');   
     let fileType = uriParts[uriParts.length - 1];  
     let formData = new FormData();
-    
-    // URI = URI.replace("file://", "");
-
     formData.append('photo', {
-      URI: RNFetchBlob.wrap(path),
+      URI,
       name: `photo.${fileType}`,
-      // filename :filename,
       type: `image/${fileType}`,
     });
-    // formData.append('Content-Type', 'image/png');
-    console.log(formData);
-     
-    // let options = {
-    //   method: 'PUT',
-    //   // params : {P_DEL_ID: DEL_ID},
-    //   body: formData,
-    //   headers: {
-    //     Accept: 'application/json',
-    //     'Content-Type': 'multipart/form-data',
-    //   },
-    // };
-  
+    
+    // console.log(formData);
     axios(apiUrl, { 
       method: 'PUT',
       params : {P_DEL_ID: DEL_ID},         
-      data: formData,
+      // data: formData,
+      data : formData ,
       headers: {
         Accept: 'application/json',
         'Content-Type': 'multipart/form-data',
       },
     }).then(
       response => {
-        console.log('success up image to server apex ')
+        // console.log('success up image to server apex ')
         //  console.log(response)
         console.log(response.data)
         // console.log("response" +JSON.stringify(response));
 
       }
       ).catch(err => {
-      console.log('err ')
-      console.log(err)
+      console.log('err ');
+      console.log(err);
     } )
 }
 

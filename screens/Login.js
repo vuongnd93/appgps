@@ -40,7 +40,7 @@ export default class LoginScreen extends React.Component {
 
        if (responcedata === 'OK') {Alert.alert('login success: OK'),
             // this.props.navigation.navigate('JobList',{data:{dataserver}}) 
-            this.props.navigation.navigate('JobList',{data:datajson,del_id:responce.data.del_id})      
+            this.props.navigation.navigate('LoginSuccess',{data:datajson,del_id:responce.data.del_id})      
         }
        else {Alert,alert('Login fail')}
        return responcedata;  
